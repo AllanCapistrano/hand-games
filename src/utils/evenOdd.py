@@ -9,8 +9,8 @@ RING_FINGER_TIP: int = 16
 PINKY_TIP: int = 20
 
 class EvenOdd(HandDetector):
-    def __init__(self, 
-        image_mode: bool = False, 
+    def __init__(
+        self,
         max_num_hands: int = 2,
         model_complexity: int = 1,
         min_detection_confidence: float = 0.5, 
@@ -20,9 +20,6 @@ class EvenOdd(HandDetector):
 
         Parameters
         ----------
-        image_mode: :class:`bool`
-            Se deve tratar as imagens de entrada como um conjunto de imagens 
-            estáticas ou um fluxo de vídeo.
         max_num_hands: :class:`int`
             Número máximo de mãos que presentes na imagem.
         model_complexity: :class:`int`
@@ -35,8 +32,8 @@ class EvenOdd(HandDetector):
             serem considerados rastreados com sucesso.
         """
 
-        super().__init__(self, 
-            image_mode = image_mode, 
+        super().__init__(
+            self,
             max_num_hands = max_num_hands, 
             model_complexity = model_complexity, 
             min_detection_confidence = min_detection_confidence,
