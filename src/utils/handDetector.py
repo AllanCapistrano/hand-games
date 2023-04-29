@@ -57,8 +57,8 @@ class HandDetector:
         self.image = image
 
         image_rgb: Mat = cvtColor(image, COLOR_BGR2RGB)
-        self.image_processed = self.hands.process(image_rgb)
-        self.hands_landmarks = self.image_processed.multi_hand_landmarks
+        image_processed = self.hands.process(image_rgb)
+        self.hands_landmarks = image_processed.multi_hand_landmarks
     
     def draw_landmarks(self) -> Mat:   
         """ Desenhas as marcações nas mãos presentes em uma imagem.
@@ -72,7 +72,7 @@ class HandDetector:
             for hand_landmarks in self.hands_landmarks:
                 self.mediapipe_draw.draw_landmarks(
                     self.image, 
-                    hand_landmarks, 
+                    hand_landmarks,
                     self.mediapipe_hands.HAND_CONNECTIONS
                 )
 
