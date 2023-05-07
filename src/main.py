@@ -1,10 +1,12 @@
 from time import time
-from typing import List, Dict
+from typing import List
 
 import cv2
+from numpy import bincount, argmax
 from utils import EvenOdd
 
-WEBCAM_INDEX = 0
+WEBCAM_INDEX = 1
+AMOUNT_NUMBERS = 11
 
 def main():
     fps_start_time: float = 0
@@ -14,6 +16,9 @@ def main():
     webcam = cv2.VideoCapture(WEBCAM_INDEX)
 
     fps_flag: bool = True
+    even_odd_flag: bool = False
+
+    numbers: List[int] = [] # TODO: Renomear variável
 
     while(True):
         success, frame = webcam.read()
@@ -22,7 +27,7 @@ def main():
             key = cv2.waitKey(1)
 
             hand_detector.process_image(frame)
-            image_with_landmarks = frame
+            # image_with_landmarks = frame
             image_with_landmarks = hand_detector.draw_landmarks()
             # hands: List[Dict] = hand_detector.find_positions()
 
@@ -31,16 +36,42 @@ def main():
             #     print(hands[0]["landmarks"][6])
 
             number_fingers: int = hand_detector.number_fingers()
-            print(f"Número de dedos: {number_fingers}")
+
+            # print(f"Número de dedos: {number_fingers}")
 
             fps_end_time: float = time()
             fps: float = 1/(fps_end_time - fps_start_time)
             fps_start_time: float = fps_end_time
 
-            if(key == 81 or key == 113): # q ou Q
+            current: float = time()
+
+            if(key == 81 or key == 113): # Q ou q
                 break
-            elif(key == 80 or key == 112): # p ou P
+            elif(key == 70 or key == 102): # F ou f
                 fps_flag = not fps_flag
+            elif(key == 83 or key == 115): # S ou s
+                even_odd_flag = True
+                start: float = time()
+
+            # Define o tempo de duração do temporizador em segundos
+            duration_timer = 3
+
+            if(even_odd_flag):
+                elapsed_time = current - start
+                time_left = duration_timer - elapsed_time
+
+                if(time_left <= 0):
+                    print("3 segundos")
+                    even_odd_flag = False
+                    print(f"Dedos: {numbers}")
+                    print(f"Moda dedos: {argmax(bincount(numbers))}")
+                    numbers.clear()
+                
+                cv2.putText(image_with_landmarks, f"Iniciando em: {int(time_left)}s", (250, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 3)
+
+            if(even_odd_flag and len(numbers) < AMOUNT_NUMBERS):
+                numbers.append(number_fingers)
+
 
             if(fps_flag):
                 cv2.putText(image_with_landmarks, f"FPS: {int(fps)}", (10, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 3)
