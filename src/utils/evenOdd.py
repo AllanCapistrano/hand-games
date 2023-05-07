@@ -1,6 +1,6 @@
 from typing import List
 
-from .handDetector import HandDetector
+from handtracking import HandDetector
 
 THUMB_TIP: int = 4
 INDEX_FINGER_TIP: int = 8
