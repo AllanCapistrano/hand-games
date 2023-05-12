@@ -5,7 +5,8 @@ import cv2
 from numpy import bincount, argmax
 from utils import EvenOdd
 
-WEBCAM_INDEX = 1
+WEBCAM_INDEX: int = 1
+TIMER_DURATION: int = 3
 
 def main():
     fps_start_time: float = 0
@@ -52,17 +53,13 @@ def main():
                 even_odd_flag = True
                 start: float = time()
 
-            # Define o tempo de duração do temporizador em segundos
-            duration_timer = 3
-
             if(even_odd_flag):
                 elapsed_time = current - start
-                time_left = duration_timer - elapsed_time
+                time_left = TIMER_DURATION - elapsed_time
 
                 amount_fingers.append(number_fingers)
 
                 if(time_left <= 0):
-                    print("3 segundos")
                     even_odd_flag = False
                     print(f"Dedos: {amount_fingers}")
                     print(f"Moda dedos: {argmax(bincount(amount_fingers))}")
