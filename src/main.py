@@ -60,6 +60,8 @@ def main():
                 elapsed_time = current - start
                 time_left = duration_timer - elapsed_time
 
+                numbers.append(number_fingers)
+
                 if(time_left <= 0):
                     print("3 segundos")
                     even_odd_flag = False
@@ -67,14 +69,26 @@ def main():
                     print(f"Moda dedos: {argmax(bincount(numbers))}")
                     numbers.clear()
                 
-                cv2.putText(image_with_landmarks, f"Iniciando em: {int(time_left)}s", (250, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 3)
-
-            if(even_odd_flag and len(numbers) < AMOUNT_NUMBERS):
-                numbers.append(number_fingers)
-
-
+                cv2.putText(
+                    image_with_landmarks, 
+                    f"Iniciando em: {int(time_left)}s", 
+                    (250, 40), 
+                    cv2.FONT_HERSHEY_PLAIN, 
+                    2, 
+                    (0, 255, 255), 
+                    3
+                )
+                
             if(fps_flag):
-                cv2.putText(image_with_landmarks, f"FPS: {int(fps)}", (10, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 3)
+                cv2.putText(
+                    image_with_landmarks, 
+                    f"FPS: {int(fps)}", 
+                    (10, 40), 
+                    cv2.FONT_HERSHEY_PLAIN, 
+                    2, 
+                    (0, 255, 255), 
+                    3
+                )
 
             cv2.imshow("Webcam", image_with_landmarks)
     
