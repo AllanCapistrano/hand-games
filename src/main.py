@@ -2,8 +2,7 @@ from time import time
 from typing import List
 
 import cv2
-from numpy import bincount, argmax
-from utils import EvenOdd
+from utils import EvenOdd, statistical_mode
 
 WEBCAM_INDEX: int = 1
 TIMER_DURATION: int = 3
@@ -27,7 +26,6 @@ def main():
             key = cv2.waitKey(1)
 
             hand_detector.process_image(frame)
-            # image_with_landmarks = frame
             image_with_landmarks = hand_detector.draw_landmarks()
             # hands: List[Dict] = hand_detector.find_positions()
 
@@ -62,7 +60,7 @@ def main():
                 if(time_left <= 0):
                     even_odd_flag = False
                     print(f"Dedos: {amount_fingers}")
-                    print(f"Moda dedos: {argmax(bincount(amount_fingers))}")
+                    print(f"Moda dedos: {statistical_mode(amount_fingers)}")
                     amount_fingers.clear()
                 
                 cv2.putText(
@@ -89,6 +87,7 @@ def main():
             cv2.imshow("Webcam", image_with_landmarks)
     
     webcam.release()
+    cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
