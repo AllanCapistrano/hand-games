@@ -3,7 +3,9 @@ from typing import List
 
 import cv2
 from numpy import ndarray
-from utils import EvenOdd, statistical_mode, detect_skin
+
+from utils import is_even, statistical_mode, detect_skin
+from handtracking import HandDetector
 
 WEBCAM_INDEX: int = 0
 TIMER_DURATION: int = 3
@@ -11,7 +13,7 @@ TIMER_DURATION: int = 3
 def main():
     fps_start_time: float = 0
 
-    hand_detector = EvenOdd()
+    hand_detector = HandDetector()
 
     webcam = cv2.VideoCapture(WEBCAM_INDEX)
 
@@ -58,6 +60,12 @@ def main():
                     even_odd_flag = False
                     print(f"Dedos: {amount_fingers}")
                     print(f"Moda dedos: {statistical_mode(amount_fingers)}")
+                    
+                    if(is_even(statistical_mode(amount_fingers))):
+                        print("É par")
+                    else:
+                        print("É ímpar")
+                    
                     amount_fingers.clear()
                 
                 cv2.putText(
