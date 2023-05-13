@@ -4,11 +4,12 @@ from typing import List
 import cv2
 from numpy import ndarray
 
-from utils import is_even, statistical_mode, detect_skin
+from utils import is_even, statistical_mode, detect_skin, nearest_number
 from handtracking import HandDetector
 
 WEBCAM_INDEX: int = 0
 TIMER_DURATION: int = 3
+TIMER_DURATION_NEAREST_NUMBER: int = 10
 
 def main():
     fps_start_time: float = 0
@@ -19,6 +20,7 @@ def main():
 
     fps_flag: bool = True
     even_odd_flag: bool = False
+    nearest_number_flag: bool = False
 
     amount_fingers: List[int] = []
 
@@ -49,6 +51,12 @@ def main():
             elif(key == 83 or key == 115): # S ou s
                 even_odd_flag = True
                 start: float = time()
+            elif(key == 78 or key == 110): # N ou n
+                guess_one: int = int(input("Palpite do jogador 1: "))
+                guess_two: int = int(input("Palpite do jogador 2: "))
+
+                nearest_number_flag = True
+                start: float = time()
 
             if(even_odd_flag):
                 elapsed_time = current - start
@@ -68,6 +76,31 @@ def main():
                     
                     amount_fingers.clear()
                 
+                cv2.putText(
+                    image_with_landmarks, 
+                    f"Iniciando em: {int(time_left)}s", 
+                    (250, 40), 
+                    cv2.FONT_HERSHEY_PLAIN, 
+                    2, 
+                    (0, 255, 255), 
+                    3
+                )
+
+            if(nearest_number_flag):
+                elapsed_time = current - start
+                time_left = TIMER_DURATION_NEAREST_NUMBER - elapsed_time
+
+                amount_fingers.append(number_fingers)
+
+                if(time_left <= 0):
+                    nearest_number_flag = False
+                    mode: int = statistical_mode(amount_fingers)
+                    
+                    print(nearest_number(guess_one, guess_two, mode))
+                    print(f"Moda dedos: {mode}")
+
+                    amount_fingers.clear()
+
                 cv2.putText(
                     image_with_landmarks, 
                     f"Iniciando em: {int(time_left)}s", 
