@@ -2,9 +2,10 @@ from time import time
 from typing import List
 
 import cv2
-from utils import EvenOdd, statistical_mode
+from numpy import ndarray
+from utils import EvenOdd, statistical_mode, detect_skin
 
-WEBCAM_INDEX: int = 1
+WEBCAM_INDEX: int = 0
 TIMER_DURATION: int = 3
 
 def main():
@@ -22,20 +23,16 @@ def main():
     while(True):
         success, frame = webcam.read()
 
+        image_to_process: ndarray = detect_skin(frame)
+
         if(success):
             key = cv2.waitKey(1)
 
-            hand_detector.process_image(frame)
-            image_with_landmarks = hand_detector.draw_landmarks()
-            # hands: List[Dict] = hand_detector.find_positions()
-
-            # if(len(hands) > 0):
-            #     print(hand_detector.hand_orientation(hands[0]))
-            #     print(hands[0]["landmarks"][6])
-
+            hand_detector.process_image(image_to_process)
+            image_with_landmarks = hand_detector.draw_landmarks(frame)
+            
             number_fingers: int = hand_detector.number_fingers()
 
-            # print(f"Número de dedos: {number_fingers}")
 
             fps_end_time: float = time()
             fps: float = 1/(fps_end_time - fps_start_time)
