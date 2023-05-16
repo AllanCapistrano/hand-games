@@ -1,20 +1,32 @@
 from time import time
 from typing import List
+from os import getenv
 
+from dotenv import load_dotenv
 import cv2
 from numpy import ndarray
 
 from utils import is_even, statistical_mode, detect_skin, nearest_number
 from handtracking import HandDetector
 
-WEBCAM_INDEX: int = 0
-TIMER_DURATION: int = 3
-TIMER_DURATION_NEAREST_NUMBER: int = 10
+load_dotenv()
+
+# ------------------------------- CONSTANTES ----------------------------------#
+try:
+    WEBCAM_INDEX: int = int(getenv("WEBCAM_INDEX"))
+    TIMER_DURATION: int = int(getenv("TIMER_DURATION"))
+    TIMER_DURATION_NEAREST_NUMBER: int = int(
+        getenv("TIMER_DURATION_NEAREST_NUMBER")
+    )
+except:
+    print("Erro! As variáveis de ambiente devem ser um números inteiros.")
+    exit()
+# -----------------------------------------------------------------------------#
 
 def main():
     fps_start_time: float = 0
 
-    hand_detector = HandDetector()
+    hand_detector: HandDetector = HandDetector()
 
     webcam = cv2.VideoCapture(WEBCAM_INDEX)
 
@@ -123,6 +135,9 @@ def main():
                 )
 
             cv2.imshow("Webcam", image_with_landmarks)
+        else:
+            print("Não foi possível iniciar a webcam!")
+            exit()
     
     webcam.release()
     cv2.destroyAllWindows()
