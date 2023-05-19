@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import cv2
 from numpy import ndarray
 
-from utils import is_even, statistical_mode, detect_skin, nearest_number
+from utils import is_even, statistical_mode, detect_skin, nearest_number, Jokenpo
 from handtracking import HandDetector
 
 load_dotenv()
@@ -14,16 +14,19 @@ load_dotenv()
 # ------------------------------- CONSTANTES ----------------------------------#
 try:
     WEBCAM_INDEX: int = int(getenv("WEBCAM_INDEX"))
-    TIMER_DURATION: int = int(getenv("TIMER_DURATION"))
+    TIMER_DURATION_EVEN_ODD: int = int(getenv("TIMER_DURATION_EVEN_ODD"))
     TIMER_DURATION_NEAREST_NUMBER: int = int(
         getenv("TIMER_DURATION_NEAREST_NUMBER")
     )
+    TIMER_DURATION_JOKENPO: int = int(getenv("TIMER_DURATION_JOKENPO"))
 except:
     print("Erro! As variáveis de ambiente devem ser um números inteiros.")
     exit()
 # -----------------------------------------------------------------------------#
 
 def main():
+    # TODO: Quando iniciar um jogo colocar as flags dos demais para falso.
+
     fps_start_time: float = 0
 
     hand_detector: HandDetector = HandDetector()
@@ -33,6 +36,7 @@ def main():
     fps_flag: bool = True
     even_odd_flag: bool = False
     nearest_number_flag: bool = False
+    jokenpo_flag: bool = False
 
     amount_fingers: List[int] = []
 
@@ -48,7 +52,6 @@ def main():
             image_with_landmarks = hand_detector.draw_landmarks(frame)
             
             number_fingers: int = hand_detector.number_fingers()
-
 
             fps_end_time: float = time()
             fps: float = 1/(fps_end_time - fps_start_time)
@@ -69,10 +72,13 @@ def main():
 
                 nearest_number_flag = True
                 start: float = time()
+            elif(key == 74 or key == 106): # J ou j
+                jokenpo_flag = True
+                start: float = time()
 
             if(even_odd_flag):
                 elapsed_time = current - start
-                time_left = TIMER_DURATION - elapsed_time
+                time_left = TIMER_DURATION_EVEN_ODD - elapsed_time
 
                 amount_fingers.append(number_fingers)
 
@@ -112,6 +118,29 @@ def main():
                     print(f"Moda dedos: {mode}")
 
                     amount_fingers.clear()
+
+                cv2.putText(
+                    image_with_landmarks, 
+                    f"Iniciando em: {int(time_left)}s", 
+                    (250, 40), 
+                    cv2.FONT_HERSHEY_PLAIN, 
+                    2, 
+                    (0, 255, 255), 
+                    3
+                )
+                
+            if(jokenpo_flag):
+                elapsed_time = current - start
+                time_left = TIMER_DURATION_EVEN_ODD - elapsed_time
+
+                if(time_left <= 0):
+                    jokenpo_flag = False
+                    
+                    hands: List = hand_detector.find_positions()
+                    jokenpo: Jokenpo = Jokenpo(hand_detector, hands)
+
+                    winner: str = jokenpo.start_game()
+                    print(winner)
 
                 cv2.putText(
                     image_with_landmarks, 
