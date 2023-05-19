@@ -26,6 +26,9 @@ except:
 
 def main():
     # TODO: Quando iniciar um jogo colocar as flags dos demais para falso.
+    # TODO: Identificar a mão de cada jogador.
+    # TODO: Verificar os tipos dos parâmetros dos métodos.
+    # TODO: Criar um método para encapsular a exibição do temporizador na tela.
 
     fps_start_time: float = 0
 
