@@ -1,5 +1,9 @@
 # Hand Games
 
+<p align="center">
+  <img src="./images/hand-games-rounded.png" alt="Hand Games Icon" width="250px" height="250px">
+</p>
+
 ## :books: Descrição ##
 Jogos de mãos utilizando a Webcam. Os jogos disponíveis são **Jokenpô**, **Par ou Ímpar** e **Número Mais Próximo**.
 
