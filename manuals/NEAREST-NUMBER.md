@@ -1,7 +1,7 @@
 # Número Mais Próximo
 
 <p align="center">
-  <img src="./images/nearest-number.png" alt="Nearest Number Icon" width="250px" height="250px">
+  <img src="../images/nearest-number.png" alt="Nearest Number Icon" width="200px" height="200px">
 </p>
 
 ## :books: Descrição ##

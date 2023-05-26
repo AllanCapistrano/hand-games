@@ -1,7 +1,7 @@
 # Jokenpô
 
 <p align="center">
-  <img src="./images/jokenpo.png" alt="Jokenpo Icon" width="250px" height="250px">
+  <img src="../images/jokenpo.png" alt="Jokenpo Icon" width="250px" height="250px">
 </p>
 
 ## :books: Descrição ##

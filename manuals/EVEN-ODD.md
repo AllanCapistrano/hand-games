@@ -1,7 +1,7 @@
 # Par ou Ímpar
 
 <p align="center">
-  <img src="./images/even-odd.png" alt="Even or Odd Icon" width="250px" height="250px">
+  <img src="../images/even-odd.png" alt="Even or Odd Icon" width="250px" height="250px">
 </p>
 
 ## :books: Descrição ##
