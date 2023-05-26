@@ -7,6 +7,11 @@
 ## :books: Descrição ##
 Jogos de mãos utilizando a Webcam. Os jogos disponíveis são **Jokenpô**, **Par ou Ímpar** e **Número Mais Próximo**.
 
+## :memo: Manuais
+- [Jokenpô](./manuals/JOKENPO.md)
+- [Par ou Ímpar](./manuals/EVEN-ODD.md)
+- [Número Mais Próximo](./manuals/NEAREST-NUMBER.md)
+
 ## :video_game: Como jogar
 1. Para utilizar este projeto, é necessário primeiramente instalar a dependência [hand-tracking](https://github.com/AllanCapistrano/handtracking) e as demais:
    ```powershell
