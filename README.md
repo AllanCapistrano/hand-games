@@ -8,9 +8,10 @@
 Jogos de mãos utilizando a Webcam. Os jogos disponíveis são **Jokenpô**, **Par ou Ímpar** e **Número Mais Próximo**.
 
 ## :video_game: Como jogar
-1. Para utilizar este projeto, é necessário primeiramente instalar a dependência [hand-tracking](https://github.com/AllanCapistrano/handtracking):
+1. Para utilizar este projeto, é necessário primeiramente instalar a dependência [hand-tracking](https://github.com/AllanCapistrano/handtracking) e as demais:
    ```powershell
    pip install -U git+https://github.com/AllanCapistrano/hand-tracking.git
+   pip install -r requirements.txt
    ```
 2. Clone este repositório;
 3. Adicione as variáveis de ambiente, e caso necessário modifique-as:
