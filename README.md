@@ -5,7 +5,9 @@
 </p>
 
 ## :books: Descrição ##
-Jogos de mãos utilizando a Webcam. Os jogos disponíveis são **Jokenpô**, **Par ou Ímpar** e **Número Mais Próximo**.
+Hand Games é uma aplicação interativa que utiliza a webcam e técnicas de visão computacional para permitir que os jogadores joguem três jogos clássicos: Jokenpô, Par ou Ímpar e Número Mais Próximo.
+
+O projeto exibe uma interface intuitiva na tela, onde os jogadores podem escolher qual jogo desejam jogar. Há opções claras para Jokenpô, Par ou Ímpar e Número Mais Próximo. Utiliza a webcam para capturar as imagens das mãos dos jogadores. Por meio de algoritmos de visão computacional, ele identifica e rastreia as mãos em tempo real.
 
 ## :memo: Manuais
 - [Jokenpô](./manuals/JOKENPO.md)
