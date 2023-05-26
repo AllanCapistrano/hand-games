@@ -14,7 +14,7 @@ Jogos de mãos utilizando a Webcam. Os jogos disponíveis são **Jokenpô**, **P
    pip install -r requirements.txt
    ```
 2. Clone este repositório;
-3. Adicione as variáveis de ambiente, e caso necessário modifique-as:
+3. Adicione as variáveis de ambiente, e caso necessário, modifique-as:
    ```powershell
    cp .env.example .env
    ```
