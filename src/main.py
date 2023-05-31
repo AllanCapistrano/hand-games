@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 import cv2
 from numpy import ndarray
 
-from utils import is_even, statistical_mode, detect_skin, nearest_number, Jokenpo
+from utils import is_even, nearest_number, Jokenpo
 from handtracking import HandDetector
-
+from handtracking.utils import detect_skin, statistical_mode
 load_dotenv()
 
 # ------------------------------- CONSTANTES ----------------------------------#
