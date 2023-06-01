@@ -134,7 +134,7 @@ def main():
                 
             if(jokenpo_flag):
                 elapsed_time = current - start
-                time_left = TIMER_DURATION_EVEN_ODD - elapsed_time
+                time_left = TIMER_DURATION_JOKENPO - elapsed_time
 
                 if(time_left <= 0):
                     jokenpo_flag = False
@@ -142,8 +142,8 @@ def main():
                     hands: List = hand_detector.find_positions()
                     jokenpo: Jokenpo = Jokenpo(hand_detector, hands)
 
-                    winner: str = jokenpo.start_game()
-                    print(winner)
+                    winner_message: str = jokenpo.start_game()
+                    print(winner_message)
 
                 cv2.putText(
                     image_with_landmarks, 
