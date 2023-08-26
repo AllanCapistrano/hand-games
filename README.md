@@ -9,6 +9,10 @@ Hand Games é uma aplicação interativa que utiliza a webcam e técnicas de vis
 
 O projeto exibe uma interface intuitiva na tela, onde os jogadores podem escolher qual jogo desejam jogar. Há opções claras para Jokenpô, Par ou Ímpar e Número Mais Próximo. Utiliza a webcam para capturar as imagens das mãos dos jogadores. Por meio de algoritmos de visão computacional, ele identifica e rastreia as mãos em tempo real.
 
+### :boat: Navegação pelos projetos: ###
+- \> hand-games
+- [hand-games-gui](https://github.com/JoaoErick/hand-games-gui)
+
 ## :memo: Manuais
 - [Jokenpô](./manuals/JOKENPO.md)
 - [Par ou Ímpar](./manuals/EVEN-ODD.md)
